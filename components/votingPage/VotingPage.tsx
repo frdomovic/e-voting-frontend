@@ -87,7 +87,7 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    return `${day}.${month}.${year}`;
+    return `${day}.${month}.${year}.`;
   }
 
   const [votingError, setVotingError] = useState("");

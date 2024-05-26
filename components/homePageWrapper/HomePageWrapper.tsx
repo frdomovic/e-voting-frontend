@@ -35,7 +35,7 @@ export default function HomePageWrapper({
   </div>
   <div className="absolute bottom-0 left-0 right-0 rounded-t-[40px] bg-black px-52 h-20 py-8 flex justify-between items-center">
       <Link href={"/"}><h3 className="text-white hover:text-blue-400 cursor-pointer">Repository</h3></Link>
-      <h3 className="text-white">Project: Open Data, Blockchain, E-Government - Anonymous Blockchain Voting Implementation</h3>
+      <h3 className="text-white">Project: Blockchain, E-Government - Anonymous Blockchain Voting Implementation</h3>
   </div>
     </div>
   );

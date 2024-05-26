@@ -19,7 +19,7 @@ export default function Header({
     return (
         <div className="w-full flex justify-between items-center px-10">
         <h4 className="text-white">
-          {switchTabs ? `Registration available until: 23.1.2024.` : `Voting available until: 24.1.2024`}
+          {switchTabs ? `Registration available until: ${timestampToDate(timeToRegister)}` : `Voting available until: ${timestampToDate(timeToVote)}`}
         </h4>
         <h4
           className="text-white hover:text-blue-500 cursor-pointer"

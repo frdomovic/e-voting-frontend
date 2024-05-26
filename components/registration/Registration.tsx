@@ -37,10 +37,9 @@ export default function Registration({
   };
   return (
     <div className="px-10 py-10">
-      <h2 className="text-lg text-white font-bold">Register To Vote</h2>
+      <h2 className="text-lg text-white font-bold">Registration</h2>
       <h4 className="text-white">
-        After registration in the contract, you will receive your secret voting
-        key
+        After registering with your NEAR account Id in the voting contract, you will receive secret voting key
       </h4>
       {registrationStep && generatedVotingKey ? (
         <div className="flex w-full flex-col gap-2">

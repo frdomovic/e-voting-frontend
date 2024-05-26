@@ -1,5 +1,4 @@
 import * as crypto from 'crypto';
-import cryptoRandomString from "crypto-random-string";
 
 const encodeSecretKey = (plainKey: string) => {
     try {
