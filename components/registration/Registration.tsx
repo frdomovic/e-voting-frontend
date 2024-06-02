@@ -7,7 +7,6 @@ interface RegistrationProps {
   registrationError: string;
   generatedVotingKey: string;
   resetRegistrationState: () => void;
-  timeToRegister: number;
 }
 
 export default function Registration({
@@ -17,7 +16,6 @@ export default function Registration({
   registrationError,
   generatedVotingKey,
   resetRegistrationState,
-  timeToRegister
 }: RegistrationProps) {
     const [isCopied, setIsCopied] = useState(false);
 

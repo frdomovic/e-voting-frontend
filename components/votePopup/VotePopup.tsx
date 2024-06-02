@@ -14,6 +14,7 @@ interface VotePopupComponentProps {
   secretKey: string;
   setVotingError: (error: string) => void;
   resetAllStates: () => void;
+  fetchAgain: () => void;
 }
 
 export default function VotePopup({
@@ -26,7 +27,8 @@ export default function VotePopup({
   votingLoading,
   secretKey,
   setVotingError,
-  resetAllStates
+  resetAllStates,
+  fetchAgain
 }: VotePopupComponentProps) {
   return (
     <div className="absolute top-0 left-0 z-10 h-screen w-full bg-black bg-opacity-80 flex justify-center items-center">
@@ -86,6 +88,7 @@ export default function VotePopup({
               setVotePopupProps({ option: "", show: false });
               setVotingError("");
               resetAllStates();
+              fetchAgain();
             }}
             className="w-full text-blue-500 hover:text-blue-700"
           >

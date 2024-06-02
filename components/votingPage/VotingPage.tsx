@@ -33,9 +33,9 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
 
   const [voteCount, setVoteCount] = useState(0);
 
-  const [timeToVote, setTimeToVote] = useState(1705363200000);
+  const [timeToVote, setTimeToVote] = useState("");
 
-  const [timeToRegister, setTimeToRegister] = useState(0);
+  const [timeToRegister, setTimeToRegister] = useState("");
 
   const [votePopupProps, setVotePopupProps] = useState({
     option: "",
@@ -71,8 +71,10 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
     try {
       const response = await axios.get(`${RELAYER_URL}/viewTimeLimits`);
       const limits = JSON.parse(response.data.response);
-      setTimeToVote(limits.voteTime);
-      setTimeToRegister(limits.registerTime);
+      if (limits.voteTime && limits.registerTime) {
+        setTimeToVote(timestampToDate(limits.voteTime * 1));
+        setTimeToRegister(timestampToDate(limits.registerTime * 1));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -116,11 +118,10 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
     const result: castVoteResponse = await response.json();
     setVotingLoading(false);
     await fetchData();
-    if (
-      result.response === "Secret voting key not valid." ||
-      result.response === "Secret key already used."
-    ) {
-      setVotingError(result.response);
+    // @ts-ignore
+    if (result.response.error) {
+      // @ts-ignore
+      setVotingError(result.response.error);
     } else {
       setDidVoteSuceeded(true);
     }
@@ -203,7 +204,7 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
   }
 
   return (
-    <div className="rounded-3xl bg-black p-4 flex flex-col my-40 mx-40">
+    <div className="rounded-3xl bg-black p-4 flex flex-col w-[700px]">
       {votePopupProps.show && (
         <VotePopup
           castVote={castVote}
@@ -216,12 +217,12 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
           secretKey={secretKey}
           setVotingError={setVotingError}
           resetAllStates={resetAllStates}
+          fetchAgain={() => fetchData()}
         />
       )}
       <Header
         switchTabs={switchTabs}
         setSwitchTabs={setSwitchTabs}
-        timestampToDate={timestampToDate}
         timeToRegister={timeToRegister}
         timeToVote={timeToVote}
         resetAllStates={resetAllStates}
@@ -234,12 +235,10 @@ export default function VotingPage({ registerVoter }: VotingPageProps) {
           registrationError={registrationError}
           generatedVotingKey={generatedVotingKey}
           resetRegistrationState={resetRegistrationState}
-          timeToRegister={timeToRegister}
         />
       ) : (
         <VotingComponent
           votingOptions={votingOptions}
-          timeToVote={timeToVote}
           setVotePopupProps={setVotePopupProps}
           voteCount={voteCount}
         />

@@ -2,16 +2,14 @@
 interface HeaderProps {
     switchTabs: boolean;
     setSwitchTabs: (switchTabs: boolean) => void;
-    timestampToDate: (timestamp: number) => string;
-    timeToRegister: number;
-    timeToVote: number;
+    timeToRegister: string;
+    timeToVote: string;
     resetAllStates: () => void;
 }
 
 export default function Header({
     switchTabs,
     setSwitchTabs,
-    timestampToDate,
     timeToRegister,
     timeToVote,
     resetAllStates
@@ -19,7 +17,7 @@ export default function Header({
     return (
         <div className="w-full flex justify-between items-center px-10">
         <h4 className="text-white">
-          {switchTabs ? `Registration available until: ${timestampToDate(timeToRegister)}` : `Voting available until: ${timestampToDate(timeToVote)}`}
+          {switchTabs ? `Registration available until: ${timeToRegister}` : `Voting available until: ${timeToVote}`}
         </h4>
         <h4
           className="text-white hover:text-blue-500 cursor-pointer"
